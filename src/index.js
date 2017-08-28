@@ -34,7 +34,7 @@ server.register([require('vision'), require('inert'), { register: require('lout'
 
           console.log('info', 'Created schema public.');
 
-          const query = fs.readFileSync('init.sql').toString();
+          const query = fs.readFileSync('src/sql/init.sql').toString();
 
           client.query(query, (err, res) => {
             Hoek.assert(!err, err);

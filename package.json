@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "NODE_PATH=. NODE_ENV=dev nodemon src/index.js",
-    "test": "test"
+    "test": "mocha --recursive"
   },
   "author": "Fatih Demirel",
   "license": "MIT",
@@ -18,7 +18,6 @@
     "hoek": "^4.2.0",
     "inert": "^4.2.1",
     "joi": "^10.6.0",
-    "lab": "^14.2.0",
     "lout": "^10.0.2",
     "pg": "^7.2.0",
     "vision": "^4.1.1"
