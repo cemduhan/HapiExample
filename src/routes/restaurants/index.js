@@ -1,7 +1,7 @@
 'use strict';
 
-const Controller = require('controllers/restaurants');
-const Validator = require('validators/restaurants');
+const Controller = require('src/controllers/restaurants');
+const Validator = require('src/validators/restaurants');
 
 module.exports = [
   {

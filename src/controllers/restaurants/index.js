@@ -2,7 +2,7 @@
 
 const Hoek = require('hoek');
 const Boom = require('boom');
-const pool = require('middleware/db').pool;
+const pool = require('src/middleware/db').pool;
 
 module.exports = {
   index(request, reply) {

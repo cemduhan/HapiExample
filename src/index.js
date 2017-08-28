@@ -5,8 +5,8 @@
 const Hapi = require('hapi');
 const Hoek = require('hoek');
 const fs = require('fs');
-const pool = require('./middleware/db').pool;
-const routes = require('./middleware/route_crawler')('./routes');
+const pool = require('src/middleware/db').pool;
+const routes = require('src/middleware/route_crawler')('./src/routes');
 
 const server = new Hapi.Server();
 

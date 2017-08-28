@@ -15,7 +15,7 @@ module.exports = function crawl(currentPath) {
         return crawl(targetPath);
       } catch (err) {
         if (err.code === 'ENOTDIR') {
-          return require(`../${currentPath}/${path.basename(targetPath, '.js')}`);
+          return require(`${currentPath}/${path.basename(targetPath, '.js')}`);
         }
 
         throw err;

@@ -1,9 +1,8 @@
 'use strict';
 
-const Controller = require('controllers/restaurants/foods');
-const Validator = require('validators/restaurants/foods');
+const Controller = require('src/controllers/restaurants/foods');
+const Validator = require('src/validators/restaurants/foods');
 
-// TODO: selecet foods where restaurant_id == foreignkey
 module.exports = [
   {
     method: 'GET',
