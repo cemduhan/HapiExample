@@ -11,6 +11,7 @@ before_install:
   - npm install
 install:
   - psql -c "CREATE USER main WITH PASSWORD 'kuz60TOL12' SUPERUSER LOGIN CREATEDB;" -U postgres
+  - psql -c "CREATE DATABASE \"HapiExample_dev\" OWNER main TEMPLATE template0;" -U postgres
   - psql -U postgres -d HapiExample_dev -a -f "./src/sql/init.sql"
 script:
   - npm test
