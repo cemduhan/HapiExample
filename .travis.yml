@@ -10,8 +10,8 @@ sudo: required
 before_install:
   - npm install
 install:
-  psql -c "CREATE USER main WITH PASSWORD 'kuz60TOL12' SUPERUSER LOGIN CREATEDB;" -U postgres
-  psql -U postgres -d HapiExample_dev -a -f "./src/sql/init.sql"
+  - psql -c "CREATE USER main WITH PASSWORD 'kuz60TOL12' SUPERUSER LOGIN CREATEDB;" -U postgres
+  - psql -U postgres -d HapiExample_dev -a -f "./src/sql/init.sql"
 script:
   - npm test
 notifications:
