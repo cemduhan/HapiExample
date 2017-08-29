@@ -1,0 +1,19 @@
+dist: trusty
+language: node_js
+node_js:
+  - "6.11.2"
+addons:
+  postgresql: "9.6"
+services:
+  - postgresql
+sudo: required
+before_install:
+  - npm install
+install:
+  psql -c "CREATE USER main WITH PASSWORD 'kuz60TOL12' SUPERUSER LOGIN CREATEDB;" -U postgres
+  psql -U postgres -d HapiExample_dev -a -f "./src/sql/init.sql"
+script:
+  - npm test
+notifications:
+  recipients:
+    - demirel-fth-93@outlook.com
