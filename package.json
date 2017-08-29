@@ -5,11 +5,13 @@
   "main": "index.js",
   "scripts": {
     "start": "NODE_PATH=. NODE_ENV=dev nodemon src/index.js",
-    "test": "mocha --recursive"
+    "test": "NODE_PATH=. NODE_ENV=test mocha --recursive",
+    "coverage": "NODE_PATH=. NODE_ENV=test nyc -x '**/src/middleware/**' -x '**/src/validators/**' -x '**/src/routes/**' -x '**/src/index.js' -x '**/test/**' --reporter=html --reporter=text mocha --recursive"
   },
   "author": "Fatih Demirel",
   "license": "MIT",
   "dependencies": {
+    "bcrypt": "^1.0.3",
     "boom": "^5.2.0",
     "good": "^7.3.0",
     "good-console": "^6.4.0",
@@ -25,6 +27,8 @@
   "devDependencies": {
     "eslint-config-airbnb": "^15.1.0",
     "eslint-plugin-react": "^7.3.0",
+    "istanbul": "^0.4.5",
+    "nyc": "^11.1.0",
     "tv": "^6.1.0"
   }
 }
