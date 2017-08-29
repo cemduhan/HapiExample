@@ -9,13 +9,37 @@ module.exports = {
     pool.connect((err, client, done) => {
       Hoek.assert(!err, err);
 
-      client.query('SELECT * FROM restaurants ORDER BY id', (err, res) => {
-        Hoek.assert(!err, err);
+      if (request.query.name) {
+        client.query(`
+          SELECT *
+          FROM restaurants
+            WHERE name ILIKE $1::text
+          ORDER BY id
+          LIMIT $2::int
+          OFFSET $3::int`,
+          [`%${request.query.name}%`, request.query.limit, request.query.offset], (err, res) => {
+            Hoek.assert(!err, err);
 
-        reply(res.rows);
+            reply(res.rows);
 
-        done();
-      });
+            done();
+          });
+      } else {
+        client.query(`
+          SELECT *
+          FROM restaurants
+          ORDER BY id
+          LIMIT $1::int
+          OFFSET $2::int
+          `,
+          [request.query.limit, request.query.offset], (err, res) => {
+          Hoek.assert(!err, err);
+
+          reply(res.rows);
+
+          done();
+        });
+      }
     });
   },
 

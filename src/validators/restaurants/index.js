@@ -4,7 +4,11 @@ const Joi = require('joi');
 
 module.exports = {
   index: {
-    //  No need to perform validation.
+    query: {
+      name: Joi.string().min(2).max(40),
+      limit: Joi.number().integer().min(1).max(40).default(20),
+      offset: Joi.number().integer().min(0).default(0)
+    }
   },
 
   show: {

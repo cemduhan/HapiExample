@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "NODE_PATH=. NODE_ENV=dev nodemon src/index.js",
+    "start": "NODE_PATH=. NODE_ENV=dev nodemon ./src/index.js",
     "test": "NODE_PATH=. NODE_ENV=test mocha --recursive",
     "coverage": "NODE_PATH=. NODE_ENV=test nyc -x '**/src/middleware/**' -x '**/src/validators/**' -x '**/src/routes/**' -x '**/src/index.js' -x '**/test/**' --reporter=html --reporter=text mocha --recursive",
     "checkcoverage": "NODE_PATH=. NODE_ENV=test nyc check-coverage --lines 100"
