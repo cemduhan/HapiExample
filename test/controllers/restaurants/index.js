@@ -119,4 +119,77 @@ describe('restaurants', function () {
       pass();
     });
   });
+
+  it('should create a restaurant with given name', function (pass) {
+    server.inject({
+      method: 'POST',
+      url: '/restaurants/',
+      payload: JSON.stringify({ restaurant: { name: 'McDonalds' }})
+    }, function (res) {
+      expect(res.statusCode).to.equal(201);
+      expect(res.result).to.be.an('object');
+      expect(res.result).to.have.all.keys('id', 'name');
+
+      expect(res.result.id).to.be.a('number');
+      expect(res.result.name).to.be.a('string');
+
+      expect(res.result.name).to.equal('McDonalds');
+
+      pass();
+    });
+  });
+
+  it('should update a restaurant with given id', function (pass) {
+    server.inject({
+      method: 'PUT',
+      url: `/restaurants/${restaurants[0].id}/`,
+      payload: JSON.stringify({ restaurant: { name: 'UpdatedMcDonalds' }})
+    }, function (res) {
+      expect(res.statusCode).to.equal(200);
+      expect(res.result).to.be.an('object');
+      expect(res.result).to.have.all.keys('id', 'name');
+
+      expect(res.result.id).to.be.a('number');
+      expect(res.result.name).to.be.a('string');
+
+      expect(res.result.name).to.equal('UpdatedMcDonalds');
+      expect(res.result.id).to.equal(restaurants[0].id);
+
+      pass();
+    });
+  });
+
+  it('should throw 404 on update if restaurant does not exist with given id', function (pass) {
+    server.inject({
+      method: 'PUT',
+      url: `/restaurants/${restaurants[1].id + 1}/`,
+      payload: JSON.stringify({ restaurant: { name: 'UpdatedMcDonalds' }})
+    }, function (res) {
+      expect(res.result.statusCode).to.equal(404);
+
+      pass();
+    });
+  });
+
+  it('should delete a restaurant with given id', function (pass) {
+    server.inject({
+      method: 'DELETE',
+      url: `/restaurants/${restaurants[0].id}/`
+    }, function (res) {
+      expect(res.statusCode).to.equal(204);
+
+      pass();
+    });
+  });
+
+  it('should throw 404 on delete if restaurant does not exist with given id', function (pass) {
+    server.inject({
+      method: 'DELETE',
+      url: `/restaurants/${restaurants[1].id + 1}/`
+    }, function (res) {
+      expect(res.result.statusCode).to.equal(404);
+
+      pass();
+    });
+  });
 });
