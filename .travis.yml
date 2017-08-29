@@ -14,7 +14,7 @@ install:
   - psql -c "CREATE DATABASE \"HapiExample_dev\" OWNER main TEMPLATE template0;" -U postgres
   - psql -U postgres -d HapiExample_dev -a -f "./src/sql/init.sql"
 script:
-  - npm test
+  - npm run coverage
 notifications:
   recipients:
     - demirel-fth-93@outlook.com
