@@ -31,7 +31,7 @@ describe('restaurants', function () {
         INSERT INTO restaurants (name)
         VALUES ($1), ($2)
         RETURNING *
-        `, ['Burger King', 'McDonalds'], (err, res) => {
+        `, ['Lezzetçi Çamlık Restaurant', 'Lezzetçi'], (err, res) => {
           Hoek.assert(!err, err);
 
           restaurants = res.rows;
@@ -59,6 +59,26 @@ describe('restaurants', function () {
     });
   });
 
+  it('should return a restaurant with specific name', function (pass) {
+    server.inject({
+      method: 'GET',
+      url: '/restaurants/?name=Lezzet'
+    }, (res) => {
+      expect(res.statusCode).to.equal(200);
+      expect(res.result).to.be.an.instanceOf(Array);
+      expect(res.result).to.have.length(2);
+
+      res.result.forEach(element => {
+        expect(element).to.be.an('object');
+        expect(element).to.have.all.keys('id', 'name', 'inserted_at');
+        expect(element.id).to.be.a('number');
+        expect(element.name).to.be.a('string');
+      });
+
+      pass();
+    });
+  });
+
   it('should return an array of all restaurants', function (pass) {
     server.inject({
       method: 'GET',
@@ -66,7 +86,7 @@ describe('restaurants', function () {
     }, (res) => {
       expect(res.statusCode).to.equal(200);
       expect(res.result).to.be.an.instanceOf(Array);
-      //expect(res.result).to.have.length(3);
+      expect(res.result).to.have.length(2);
 
       res.result.forEach(element => {
         expect(element).to.be.an('object');
