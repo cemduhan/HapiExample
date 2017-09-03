@@ -121,7 +121,7 @@ describe('restaurants', function () {
   it('should throw 404 if restaurant with given id does not exist', function (pass) {
     server.inject({
       method: 'GET',
-      url: `/restaurants/${restaurants[1].id + 1}/`
+      url: `/restaurants/${restaurants[1].id + 13}/`
     }, function (res) {
       expect(res.statusCode).to.equal(404);
 
@@ -182,7 +182,7 @@ describe('restaurants', function () {
   it('should throw 404 on update if restaurant does not exist with given id', function (pass) {
     server.inject({
       method: 'PUT',
-      url: `/restaurants/${restaurants[1].id + 1}/`,
+      url: `/restaurants/${restaurants[1].id + 13}/`,
       payload: JSON.stringify({ restaurant: { name: 'UpdatedMcDonalds' }})
     }, function (res) {
       expect(res.result.statusCode).to.equal(404);
@@ -205,7 +205,7 @@ describe('restaurants', function () {
   it('should throw 404 on delete if restaurant does not exist with given id', function (pass) {
     server.inject({
       method: 'DELETE',
-      url: `/restaurants/${restaurants[1].id + 1}/`
+      url: `/restaurants/${restaurants[1].id + 13}/`
     }, function (res) {
       expect(res.result.statusCode).to.equal(404);
 
